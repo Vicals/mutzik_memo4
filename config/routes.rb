@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  post 'reply/create/:id' => "reply#create"
+
+  get 'reply/destroy'
+
+  devise_for :users
   root 'memo#index'
   
   get 'memo/index'

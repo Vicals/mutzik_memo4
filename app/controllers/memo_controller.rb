@@ -1,10 +1,13 @@
 class MemoController < ApplicationController
+  before_action :authenticate_user!, except: :index
+  
   def index
     @post = Post.all
   end
 
   def create
     @post = Post.new
+    @post.user_id = current_user.id
     @post.title = params[:title]
     @post.content = params[:content]
     @post.save
