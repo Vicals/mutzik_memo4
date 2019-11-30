@@ -21,6 +21,26 @@
         <h5><%= @post.content %></h6>
     </div>
     <hr>
+    <% @post.replies.each do |r| %>
+        작성자 : <%= r.content %>
+        <% if current_user.id == r.user_id %>
+            <a href="/reply/destroy/<%= r.id %>">
+                <span class="badge badge-danger">삭제</span>
+            </a>
+        <% end %>
+        <br>
+    <% end %>
+    <hr>
+    <form action="/reply/create/<%= @post.id %>" method="POST">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">댓글 작성하기</label>
+        <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <div style="text-align:right;">
+          <button type="submit" class="btn btn-dark">댓글쓰기</button>
+      </div>
+    </form>
     <div style="margin-top:30px; text-align:right;">
         <a href="/memo/index">
             <button type="button" class="btn btn-dark">목록보기</button>

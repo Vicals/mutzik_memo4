@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  post 'reply/create/:id' => "reply#create"
-
-  get 'reply/destroy'
-
   devise_for :users
   root 'memo#index'
   
@@ -24,6 +20,10 @@ Rails.application.routes.draw do
 
   get 'memo/destroy'
   get 'memo/destroy/:id' => "memo#destroy"
+  
+  post 'reply/create/:id' => "reply#create"
+  
+  get 'reply/destroy/:id' => "reply#destroy"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
